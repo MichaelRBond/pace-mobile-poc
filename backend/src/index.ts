@@ -1,5 +1,6 @@
 import { Server } from "@hapi/hapi";
 import { CommunicationsController } from "./api/communication-contoller";
+import { VerifyAuthController } from "./api/verify-auth";
 import { mysqlClientProvider } from "./clients/mysql-client";
 import { config } from "./config";
 import { AccountDao } from "./dao/accounts";
@@ -24,9 +25,11 @@ const communicationsModel = new CommunicationsModel(communicationsDao);
 const authentication = new Authentication(accountModel);
 
 const communicationsController: CommunicationsController = new CommunicationsController(communicationsModel);
+const verifyAuthController: VerifyAuthController = new VerifyAuthController();
 
 const endpointControllers: EndpointController[] = [
   communicationsController,
+  verifyAuthController,
 ];
 
 getHapiServer(authentication, endpointControllers).then((server) => {
