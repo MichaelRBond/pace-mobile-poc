@@ -1,0 +1,7 @@
+{
+  "name": "pace-mobile-poc-backend",
+  "version": "0.1",
+  "description": "Pace Enterprise Mobile Communication POC",
+  "main": "index.js",
+  "license": "NONE"
+}
