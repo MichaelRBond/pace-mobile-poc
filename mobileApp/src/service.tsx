@@ -1,4 +1,4 @@
-export interface Communication{
+export interface BroadcastedEvent{
     id: number;
     subject: String;
     body:  String;
@@ -19,7 +19,7 @@ class Service{
                 status:200,
                 time:0
             },
-            communications:[
+            broadCastedEvents:[
                 {
                     id: 1,
                     subject: "Test Title",
@@ -50,7 +50,7 @@ class Service{
             ] 
 
         };
-        test.communications as Array<Communication>;
+        return test.broadCastedEvents as Array<BroadcastedEvent>;
     }
 }
 

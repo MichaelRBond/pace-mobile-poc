@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "native-base": "^2.13.8",
     "react": "16.8.1",
     "react-native": "0.61.2",
     "react-native-splash-screen": "^3.2.0"

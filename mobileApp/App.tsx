@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
 import {
   Platform,
-  Text,
 } from 'react-native';
 
-import Service from './src/service'
+import Service, { BroadcastedEvent } from './src/service'
 import EventList from './src/eventList'
 import SplashScreen from 'react-native-splash-screen'
+import { LoadingView } from "./src/LoadingView";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+interface Props {};
+interface State {
+  isLoading: boolean
+  eventsData: Array<BroadcastedEvent>;
+}
 
-export default class App extends Component<any, any> {
+export default class App extends Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      eventsData: [],
+      isLoading: true,
+    }
+    this.getEventsData = this.getEventsData.bind(this);
+  }
+
   componentDidMount() {
     SplashScreen && SplashScreen.hide();
+    this.getEventsData();
+  }
+
+  getEventsData() {
+    const test = new Service();
+    const data = test.fetchCommunications();
+    this.setState({
+      eventsData: data,
+      isLoading: false
+    });
   }
 
   public render() {
-    let test = new Service();
-    let data = test.fetchCommunications()
+    const { isLoading } = this.state;
+    if(isLoading) {
+      return <LoadingView/>
+    }
     return <EventList></EventList>;
   }
 }
