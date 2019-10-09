@@ -1,7 +1,7 @@
+import { Request, ResponseToolkit, Server } from "@hapi/hapi";
 import * as bcrypt from "bcryptjs";
 import { randomBytes } from "crypto";
 import { generate } from "generate-password";
-import { Request, ResponseToolkit, Server } from "hapi";
 import { ValidateResponse } from "hapi-auth-basic";
 import { get, isNull } from "nullable-ts";
 import { AccountModel } from "../models/accounts";
