@@ -1,4 +1,4 @@
-import { Server } from "hapi";
+import { Server } from "@hapi/hapi";
 import { CommunicationsController } from "./api/communication-contoller";
 import { mysqlClientProvider } from "./clients/mysql-client";
 import { config } from "./config";

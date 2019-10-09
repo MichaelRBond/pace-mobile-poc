@@ -1,15 +1,11 @@
-import { Request, ServerRoute } from "hapi";
-import * as Joi from "joi";
+import { Request, ServerRoute } from "@hapi/hapi";
+// import * as Joi from "@hapi/joi";
 import { CommunicationsModel } from "../models/communications-model";
 import { EndpointController } from "../models/endpoint-controller";
 
 interface GetCommunicationsResponse {
   message: string;
 }
-
-const JoiGetCommunicationsResponse = {
-  message: Joi.string(),
-};
 
 export class CommunicationsController extends EndpointController {
 
@@ -19,6 +15,8 @@ export class CommunicationsController extends EndpointController {
   }
 
   public async getCommunications(request: Request): Promise<GetCommunicationsResponse> {
+    // TODO: Fix me
+    this.communicationsModel.noop();
     return {message: "hello world!"};
   }
 
@@ -28,11 +26,8 @@ export class CommunicationsController extends EndpointController {
         method: "GET",
         options: {
           handler: this.getCommunications,
-          response: {
-            schema: JoiGetCommunicationsResponse,
-          },
         },
-        path: "/api/v1/feed",
+        path: "/api/v1/communications",
       },
     ];
   }

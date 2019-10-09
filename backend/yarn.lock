@@ -650,19 +650,60 @@
     "@types/podium" "*"
     "@types/shot" "*"
 
-"@types/hapi@^17.0.0":
-  version "17.8.6"
-  resolved "https://registry.yarnpkg.com/@types/hapi/-/hapi-17.8.6.tgz#bf9132c2dd56b6344dd3f60eb86806d197f0e90b"
-  integrity sha512-8xfvwsfZmQCSognkNDMAkyNlnQwfpGdIP1Y7h/EMgcEzrVHB6lmuDHc8TEMhOJ6lt40TKGBA1e9z9htb/KSbOA==
+"@types/hapi__boom@*":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@types/hapi__boom/-/hapi__boom-7.4.1.tgz#06439d7637245dcbe6dd6548d2a91f2c1243d80b"
+  integrity sha512-x/ZK824GomII7Yoei/nMoB46NQcSfGe0iVpZK3uUivxIAfUUSzRvu8RQO7ZkKapIgzgshHZc+GR+z/BQ8l2VLg==
+
+"@types/hapi__catbox@*":
+  version "10.2.2"
+  resolved "https://registry.yarnpkg.com/@types/hapi__catbox/-/hapi__catbox-10.2.2.tgz#b13fbdd6006c8793eb80919158593bc2bf8307c4"
+  integrity sha512-AWK70LgRsRWL1TNw+aT0IlS56E0pobvFdr/en0K8XazyK4Ey6T/jXhQqv/iQ6FJAAU+somMzgmt9fWq2TaaOkA==
+
+"@types/hapi__hapi@^18.2.5":
+  version "18.2.5"
+  resolved "https://registry.yarnpkg.com/@types/hapi__hapi/-/hapi__hapi-18.2.5.tgz#37afc3db0380e89527bb850a0922f15da0bfe688"
+  integrity sha512-hCAQVtE3OZCihJrn5SxQYmAkIdtE1BwAyvGkxwnPwP+IIe0MQxqbP2s0cwlAwimGOdDQ/ArH+7i6FGDKPlZhFQ==
   dependencies:
-    "@types/boom" "*"
-    "@types/catbox" "*"
-    "@types/iron" "*"
-    "@types/joi" "*"
-    "@types/mimos" "*"
+    "@types/hapi__boom" "*"
+    "@types/hapi__catbox" "*"
+    "@types/hapi__iron" "*"
+    "@types/hapi__joi" "*"
+    "@types/hapi__mimos" "*"
+    "@types/hapi__podium" "*"
+    "@types/hapi__shot" "*"
     "@types/node" "*"
-    "@types/podium" "*"
-    "@types/shot" "*"
+
+"@types/hapi__iron@*":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@types/hapi__iron/-/hapi__iron-5.1.0.tgz#35ebddae3a100c468b84fe075689522ad2f3703d"
+  integrity sha512-RxYHIc8wFe8M1jMwgovskoHNVjuP1q0tUGCNnbHnhA4SBMyYg+JHIAz8yFibSwgF4gWYh5yHMpbmK5kmnG4HRA==
+  dependencies:
+    "@types/node" "*"
+
+"@types/hapi__joi@*":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@types/hapi__joi/-/hapi__joi-16.0.0.tgz#ba71b9514a3152909eb48e33e67be4cae550ea0d"
+  integrity sha512-WNQRIP65MmVIrLYk4JzRhwUm0jwN0cbeo7kzyQf8QuGAsQ6bgnRfRUipOY+b9RRtfA8xI9ZyM5E46rNSgUaB8g==
+
+"@types/hapi__mimos@*":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/hapi__mimos/-/hapi__mimos-4.1.0.tgz#47dbf89ebfc05183c1de2797e9426793db9a0d85"
+  integrity sha512-hcdSoYa32wcP+sEfyf85ieGwElwokcZ/mma8eyqQ4OTHeCAGwfaoiGxjG4z1Dm+RGhIYLHlW54ji5FFwahH12A==
+  dependencies:
+    "@types/mime-db" "*"
+
+"@types/hapi__podium@*":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@types/hapi__podium/-/hapi__podium-3.4.0.tgz#8efbe18c422e5306a7ee970d48448cf8ff4da37c"
+  integrity sha512-LE85jLgqR5HscGQ7SaSz6FMRsKlQ1wHVbYc9u0yq7NKDRvZiQFIrr3Pl1RPzK7QNUdZP8zmJibe8q0JcafTAJQ==
+
+"@types/hapi__shot@*":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/hapi__shot/-/hapi__shot-4.1.0.tgz#c2f096bf89906e25b530869becca44d40b168b75"
+  integrity sha512-vIySJYkwIGXMB5eFaZu3U8dS9CAZmteJfmkRn9bYH5uNcSvVgiwDROiwAkD7ej88qA+RZPkUK70KmeDs3LRHvw==
+  dependencies:
+    "@types/node" "*"
 
 "@types/iron@*":
   version "5.0.1"
