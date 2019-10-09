@@ -1,0 +1,81 @@
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+
+#reader-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#reader-container > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+#groups-container {
+  flex: 1 auto;
+  order: 1;
+}
+
+#feeds-container {
+  flex: 1 auto;
+  order: 2;
+}
+
+.feed-menu-container {
+  display: inline-block;
+}
+
+#items-container {
+  flex: 5 0px;
+  order: 3;
+}
+
+#items-container-control-bar {
+  border-style: solid;
+  border-color: lightgrey;
+  padding: 1em;
+}
+
+.grapevine-menu {
+  float: right;
+}
+
+.item-container-button {
+  margin-right: 1em;
+}
+
+.rss-item-date {
+  display: inline-block;
+}
+
+.rss-item-tools {
+  float: right;
+}
+
+.rss-item-header {
+  padding: 1em;
+}
+
+.rss-item-title {
+  font-weight: bold;
+}
+
+.rss-item-feed {
+  font-style: italic;
+}
+
+.rss-item {
+  margin: 1em;
+  border-style: solid;
+  border-color: lightgray;
+}
+
+.rss-item-text {
+  margin: 1em;
+  padding-top: 1em;
+  border-top-style: dotted;
+  border-top-color: lightgray;
+}
+
+.expand-icon {
+  margin-right: 1em;
+}

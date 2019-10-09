@@ -2,6 +2,8 @@ node_modules
 
 backend/yarn-error.log
 package-lock.json
+npm-debug.log
+yarn-error.log
 
 dist
 .build
