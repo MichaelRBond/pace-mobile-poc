@@ -1,15 +1,20 @@
+import { Nullable } from "nullable-ts";
 import { MySqlClient } from "../clients/mysql-client";
+import { Communication, CommunicationBase } from "../models/communications-model";
 
 export class CommunicationsDao {
   constructor(private mysqlProvider: () => MySqlClient) {}
 
-  // TODO: Type return better
-  public async getCommunications(): Promise<any> {
-    await this.mysqlProvider().query("SELECT * FROM `something`");
+  public async getCommunications(): Promise<Communication[]> {
+    await this.mysqlProvider().query("SELECT * FROM `communications`");
+    return [];
   }
 
-  // TODO: Remove me
-  public noop(): string {
-    return "no-op";
+  public async save(communication: CommunicationBase): Promise<number> {
+    return 0;
+  }
+
+  public async getById(id: number): Promise<Nullable<Communication>> {
+    return null;
   }
 }
