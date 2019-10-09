@@ -5,12 +5,12 @@ import { config } from "./config";
 import { CommunicationsDao } from "./dao/communications-dao";
 import { CommunicationsModel } from "./models/communications-model";
 import { EndpointController } from "./models/endpoint-controller";
-import { DateTime } from "./utils/date-time";
-import { Http } from "./utils/http";
-import { logger } from "./utils/logger";
+// import { DateTime } from "./utils/date-time";
+// import { Http } from "./utils/http";
+// import { logger } from "./utils/logger";
 
-const datetime = new DateTime();
-const http = new Http();
+// const datetime = new DateTime();
+// const http = new Http();
 
 const communicationsDao = new CommunicationsDao(mysqlClientProvider);
 const communicationsModel = new CommunicationsModel(communicationsDao);
