@@ -7,7 +7,7 @@ import { CommunicationsModel } from "./models/communications-model";
 import { EndpointController } from "./models/endpoint-controller";
 // import { DateTime } from "./utils/date-time";
 // import { Http } from "./utils/http";
-// import { logger } from "./utils/logger";
+import { logger } from "./utils/logger";
 
 // const datetime = new DateTime();
 // const http = new Http();
@@ -27,7 +27,7 @@ getHapiServer(endpointControllers).then((server) => {
   server.start();
   return server;
 }).then((server) => {
-  // logger.info(`Hapi Running at: ${server.info.uri}`);
+  logger.info(`Hapi Running at: ${server.info.uri}`);
 }).catch((err) => {
   throw err;
 });
