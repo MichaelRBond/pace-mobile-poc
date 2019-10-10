@@ -1,8 +1,9 @@
-import { Intent, Tag } from "@blueprintjs/core";
+import { Intent } from "@blueprintjs/core";
 import { PaceBackendClient, TaggedCommunication } from "external-clients/pacebackend";
 import * as React from "react";
 import { EventCreator } from "./EventCreator";
 import { EventList } from "./EventList";
+import { AppToaster } from "./PaceFrontend";
 
 interface Props {
   pacebackend: PaceBackendClient;
@@ -31,7 +32,6 @@ export class EventManager extends React.Component<Props, State> {
   public render() {
     return (
       <div id={"reader-container"} style={{ maxWidth: "100vh", margin: "auto" }}>
-        {this.state.error && <Tag intent={Intent.DANGER}>{"Error"}</Tag>}
         <EventCreator pacebackend={this.props.pacebackend} onCreate={this.addCommunication.bind(this)}/>
         <div style={{margin: "2em 0", padding: 0}}/>
         <EventList communications={this.state.communications} deleteCallback={this.removeCommunication.bind(this)}/>
@@ -48,8 +48,15 @@ export class EventManager extends React.Component<Props, State> {
   }
 
   private async deleteData(id: number): Promise<void> {
-    await this.props.pacebackend.deleteCommunication(id);
-    this.setState({ communications: this.state.communications.filter((communication) => communication.id !== id)});
+    try {
+      await this.props.pacebackend.deleteCommunication(id);
+      this.setState({ communications: this.state.communications.filter((communication) => communication.id !== id)});
+    } catch {
+      AppToaster.show({
+        intent: Intent.DANGER,
+        message: "Failed to delete message",
+      });
+    }
   }
 
   private async loadData(): Promise<void> {
@@ -58,7 +65,10 @@ export class EventManager extends React.Component<Props, State> {
       const communications: TaggedCommunication[] = await this.props.pacebackend.getCommunications();
       this.setState({ communications: this.sortCommunications(communications) });
     } catch {
-      this.setState({ error: true });
+      AppToaster.show({
+        intent: Intent.DANGER,
+        message: "Failed to load messages",
+      });
     }
   }
 
