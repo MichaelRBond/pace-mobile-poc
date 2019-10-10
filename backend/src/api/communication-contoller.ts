@@ -3,7 +3,7 @@ import { Request, ServerRoute } from "@hapi/hapi";
 import * as Joi from "@hapi/joi";
 import { orElseThrow } from "nullable-ts";
 import { ApiMessageResponse, joiApiMessageResponse } from "../models/api";
-import { CommunicationBase, CommunicationGetResponse, CommunicationsModel } from "../models/communications-model";
+import { CommunicationBase, CommunicationGetResponse, CommunicationsModel } from "../models/communications";
 import { EndpointController } from "../models/endpoint-controller";
 import { thrownErrMsg, transformErrors } from "../utils/errors";
 import { logger } from "../utils/logger";

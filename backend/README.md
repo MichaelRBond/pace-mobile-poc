@@ -31,4 +31,13 @@ curl --user 'admin:kh$E6YhGp*ujg@W$suVaPT">b)5C~"Bx' -H "Content-Type: applicati
 # Delete a communication
 curl --user 'admin:kh$E6YhGp*ujg@W$suVaPT">b)5C~"Bx' -H "Content-Type: application/json" -X DELETE http://localhost:3000/api/v1/communications/4 | jq .
 
+# get RSVP Count for a communication
+curl --user 'admin:kh$E6YhGp*ujg@W$suVaPT">b)5C~"Bx' -H "Content-Type: application/json" -X GET http://localhost:3000/api/v1/rsvp/4 | jq .
+
+# save RSVP for a communication
+curl --user 'admin:kh$E6YhGp*ujg@W$suVaPT">b)5C~"Bx' -H "Content-Type: application/json" -X POST http://localhost:3000/api/v1/rsvp/4 | jq .
+
+# delete RSVP for a communication
+curl --user 'admin:kh$E6YhGp*ujg@W$suVaPT">b)5C~"Bx' -H "Content-Type: application/json" -X DELETE http://localhost:3000/api/v1/rsvp/4 | jq .
+
 ```

@@ -1,6 +1,6 @@
 import { isNullOrUndefined, Nullable } from "nullable-ts";
 import { MySqlClient } from "../clients/mysql-client";
-import { Communication, CommunicationBase } from "../models/communications-model";
+import { Communication, CommunicationBase } from "../models/communications";
 import { DateTime } from "../utils/date-time";
 
 export class CommunicationsDao {

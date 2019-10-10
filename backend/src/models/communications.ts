@@ -1,5 +1,5 @@
 import { isNullOrUndefined, Nullable, orElseThrow } from "nullable-ts";
-import { CommunicationsDao } from "../dao/communications-dao";
+import { CommunicationsDao } from "../dao/communications";
 
 export enum CommunicationUrgency {
   NONE,

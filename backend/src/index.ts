@@ -1,13 +1,16 @@
 import { Server } from "@hapi/hapi";
 import { CommunicationsController } from "./api/communication-contoller";
+import { RsvpController } from "./api/rsvp-controller";
 import { VerifyAuthController } from "./api/verify-auth";
 import { mysqlClientProvider } from "./clients/mysql-client";
 import { config } from "./config";
 import { AccountDao } from "./dao/accounts";
-import { CommunicationsDao } from "./dao/communications-dao";
+import { CommunicationsDao } from "./dao/communications";
+import { RsvpDao } from "./dao/rsvp";
 import { AccountModel } from "./models/accounts";
-import { CommunicationsModel } from "./models/communications-model";
+import { CommunicationsModel } from "./models/communications";
 import { EndpointController } from "./models/endpoint-controller";
+import { RsvpModel } from "./models/rsvp";
 import { Authentication } from "./utils/authentication";
 import { DateTime } from "./utils/date-time";
 // import { Http } from "./utils/http";
@@ -18,17 +21,20 @@ const datetime = new DateTime();
 
 const accountDao = new AccountDao(mysqlClientProvider);
 const communicationsDao = new CommunicationsDao(mysqlClientProvider, datetime);
+const rsvpDao = new RsvpDao(mysqlClientProvider);
 
 const accountModel = new AccountModel(accountDao);
-const communicationsModel = new CommunicationsModel(communicationsDao);
-
 const authentication = new Authentication(accountModel);
+const communicationsModel = new CommunicationsModel(communicationsDao);
+const rsvpModel = new RsvpModel(rsvpDao);
 
-const communicationsController: CommunicationsController = new CommunicationsController(communicationsModel);
-const verifyAuthController: VerifyAuthController = new VerifyAuthController();
+const communicationsController = new CommunicationsController(communicationsModel);
+const rsvpController = new RsvpController(rsvpModel);
+const verifyAuthController = new VerifyAuthController();
 
 const endpointControllers: EndpointController[] = [
   communicationsController,
+  rsvpController,
   verifyAuthController,
 ];
 
