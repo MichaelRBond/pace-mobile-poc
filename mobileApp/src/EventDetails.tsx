@@ -21,8 +21,8 @@ export default class EventDetails extends React.Component<Props, Communication> 
         let endDate: string;
         const isEvent = communication.event != null;
         if (isEvent) {
-            startDate = formatUnixTimestamp(communication.event.start_time);
-            endDate = formatUnixTimestamp(communication.event.end_time);
+            startDate = formatUnixTimestamp(communication.event.start_date);
+            endDate = formatUnixTimestamp(communication.event.end_date);
         }
 
         return (
@@ -35,7 +35,7 @@ export default class EventDetails extends React.Component<Props, Communication> 
                 </View>
                 {isEvent &&
                     <View>
-                        <Text>Event: {startDate} - {endDate}</Text>
+                        <Text>Event: {startDate} to {endDate}</Text>
                     </View>
                 }
                 <View>
@@ -55,8 +55,9 @@ const formatUnixTimestamp = (ts: number): string => {
     const month = d.getMonth() + 1;
     const day = d.getDate();
     const hour = d.getHours();
-    const minute = d.getMinutes();
-    return year + "-" + month + "-" + day + " @ " + hour + ":" + minute;
+    const minute = d.getMinutes() < 10 ? "0" + d.getMinutes() : "" + d.getMinutes();
+    const ampm = hour < 12 ? "AM" : "PM";
+    return `${year}-${month}-${day} @ ${hour % 12}:${minute} ${ampm}`;
 };
 
 const styles = StyleSheet.create({

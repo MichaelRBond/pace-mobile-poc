@@ -7,8 +7,8 @@ export interface Communication {
     created_date: number;
     expiration_date: number;
     event?: {
-        start_time: number;
-        end_time: number;
+        start_date: number;
+        end_date: number;
     };
 }
 
