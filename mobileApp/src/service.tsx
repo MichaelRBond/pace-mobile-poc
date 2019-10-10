@@ -18,7 +18,6 @@ export class Service {
     ) { }
 
     public async fetchCommunications(): Promise<Communication[]> {
-        // return [];
         const resp: AxiosResponse<Communication[]> =
             await axios.get(`http://${this.host}/api/v1/communications`);
         return resp.data;
