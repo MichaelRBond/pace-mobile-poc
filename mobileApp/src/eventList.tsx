@@ -5,6 +5,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import EventDetails from './EventDetails'
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import { Card, CardItem, Body, Content } from 'native-base';
+import { ColorHeader } from './Header';
 
 
 const styles = StyleSheet.create({
@@ -49,7 +50,9 @@ export class EventList extends React.Component<Props, State> {
 
     public render() {
         return (
+          
           <View style={styles.container}>
+            <ColorHeader/>
             <Content>
           
               {this.state.communications.map(item =>{
