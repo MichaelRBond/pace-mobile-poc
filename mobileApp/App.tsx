@@ -3,7 +3,8 @@ import {
   Platform,
 } from 'react-native';
 
-import Service, { BroadcastedEvent } from './src/service'
+import {Service} from './src/service'
+import {BroadcastedEvent} from './src/service'
 import EventList from './src/eventList'
 import SplashScreen from 'react-native-splash-screen'
 import { LoadingView } from "./src/LoadingView";
@@ -34,7 +35,7 @@ export default class App extends Component<Props, State> {
     const test = new Service();
     const data = test.fetchCommunications();
     this.setState({
-      eventsData: data,
+      eventsData: data.broadCastedEvents,
       isLoading: false
     });
   }
@@ -44,6 +45,8 @@ export default class App extends Component<Props, State> {
     if(isLoading) {
       return <LoadingView/>
     }
-    return <EventList></EventList>;
+    
+    return <EventList communications={this.state.eventsData}> </EventList>;
+
   }
 }

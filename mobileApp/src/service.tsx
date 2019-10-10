@@ -8,13 +8,13 @@ export interface BroadcastedEvent{
     end_time: number,
 }
 
-class Service{
+export class Service{
     constructor(){
 
-    }
+    } 
 
     public fetchCommunications() {
-        let test =  {
+        return {
             meta:{
                 status:200,
                 time:0
@@ -50,8 +50,6 @@ class Service{
             ] 
 
         };
-        return test.broadCastedEvents as Array<BroadcastedEvent>;
     }
 }
 
-export default Service;
