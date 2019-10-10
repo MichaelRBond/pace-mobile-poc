@@ -9,11 +9,15 @@ import EventList from './src/eventList'
 import SplashScreen from 'react-native-splash-screen'
 import { LoadingView } from "./src/LoadingView";
 
-interface Props {};
+
+interface Props {
+};
 interface State {
   isLoading: boolean
   eventsData: Array<BroadcastedEvent>;
 }
+
+
 
 export default class App extends Component<Props, State> {
 
