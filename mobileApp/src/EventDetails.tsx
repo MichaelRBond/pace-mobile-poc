@@ -11,7 +11,6 @@ export default class EventDetails extends React.Component<Props, BroadcastedEven
     constructor(props: Props) {
         super(props);
         this.state = props.navigation.getParam("event");
-        console.log(this.state);
     }
 
     public render() {

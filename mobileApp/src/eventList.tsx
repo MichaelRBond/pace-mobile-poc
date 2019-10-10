@@ -2,6 +2,7 @@ import { Body, Card, CardItem, Content } from "native-base";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
+import { ColorHeader } from "./Header";
 import { BroadcastedEvent } from "./service";
 
 const styles = StyleSheet.create({
@@ -36,6 +37,7 @@ export class EventList extends React.Component<Props, State> {
     public render() {
         return (
             <View style={styles.container}>
+                <ColorHeader />
                 <Content>
                     {this.state.communications.map((item) => {
                         return (
@@ -48,7 +50,6 @@ export class EventList extends React.Component<Props, State> {
                                     </Body>
                                 </CardItem>
                             </Card>);
-
                     })}
                 </Content>
             </View>);
