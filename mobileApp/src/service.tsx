@@ -8,8 +8,8 @@ export interface BroadcastedEvent {
     end_time?: number;
 }
 
-export class Service{
-    constructor(){
+export class Service {
+    constructor() {
         /** noop */
     }
 
@@ -51,4 +51,3 @@ export class Service{
         };
     }
 }
-
