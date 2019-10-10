@@ -3,6 +3,7 @@ import { CommunicationsController } from "./api/communication-contoller";
 import { RsvpController } from "./api/rsvp-controller";
 import { VerifyAuthController } from "./api/verify-auth";
 import { mysqlClientProvider } from "./clients/mysql-client";
+import { OneSignalClient } from "./clients/onesignal";
 import { config } from "./config";
 import { AccountDao } from "./dao/accounts";
 import { CommunicationsDao } from "./dao/communications";
@@ -13,20 +14,23 @@ import { EndpointController } from "./models/endpoint-controller";
 import { RsvpModel } from "./models/rsvp";
 import { Authentication } from "./utils/authentication";
 import { DateTime } from "./utils/date-time";
-// import { Http } from "./utils/http";
+import { Http } from "./utils/http";
 import { logger } from "./utils/logger";
 
 const datetime = new DateTime();
-// const http = new Http();
+const http = new Http();
 
 const accountDao = new AccountDao(mysqlClientProvider);
 const communicationsDao = new CommunicationsDao(mysqlClientProvider, datetime);
 const rsvpDao = new RsvpDao(mysqlClientProvider);
 
+const onesignal = new OneSignalClient(http, config.onesignal.endpoint, config.onesignal.apiKey, config.onesignal.appId);
+
 const accountModel = new AccountModel(accountDao);
-const authentication = new Authentication(accountModel);
-const communicationsModel = new CommunicationsModel(communicationsDao);
+const communicationsModel = new CommunicationsModel(communicationsDao, onesignal);
 const rsvpModel = new RsvpModel(rsvpDao);
+
+const authentication = new Authentication(accountModel);
 
 const communicationsController = new CommunicationsController(communicationsModel);
 const rsvpController = new RsvpController(rsvpModel);

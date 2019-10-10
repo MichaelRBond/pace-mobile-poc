@@ -1,5 +1,12 @@
 import Axios, { AxiosPromise, AxiosRequestConfig } from "axios";
 
+export enum HttpMethods {
+  get = "GET",
+  post = "POST",
+  patch = "PATCH",
+  delete = "DELETE",
+}
+
 export class Http {
   public request<T>(params: AxiosRequestConfig): AxiosPromise<T> {
     return Axios.request(params);
