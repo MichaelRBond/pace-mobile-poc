@@ -1,42 +1,41 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { BroadcastedEvent } from "./service";
 
 export interface Props {
-    navigation: any;
-    event: BroadcastedEvent;
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class EventDetails extends React.Component<Props,{}>{
+export default class EventDetails extends React.Component<Props, BroadcastedEvent>{
     constructor(props: Props) {
         super(props);
-        console.log('below')
-        console.log(props.navigation.state.params)
+        this.state = props.navigation.getParam("event");
     }
 
     public render() {
-        let event = this.props.navigation.state.params.event;
-        const broadCastDate = new Date(event.date);
+        const event = this.state;
+        const broadCastDate = formatUnixTimestamp(event.date);
 
-        let startDate: Date;
-        let endDate: Date;
+        let startDate: string;
+        let endDate: string;
         const isEvent = event.start_time != null && event.end_time != null;
         if (isEvent) {
-            startDate = new Date(event.start_time);
-            endDate = new Date(event.end_time);
+            startDate = formatUnixTimestamp(event.start_time);
+            endDate = formatUnixTimestamp(event.end_time);
         }
-        // {event.subject}
+
         return (
             <View>
                 <View>
                     <Text>{event.subject}</Text>
                 </View>
                 <View>
-                    <Text>{new Date(event.date).toString()}</Text>
+                    <Text>{broadCastDate}</Text>
                 </View>
                 {isEvent &&
                     <View>
-                        <Text>Event: {startDate.toString()} - {endDate.toString()}</Text>
+                        <Text>Event: {startDate} - {endDate}</Text>
                     </View>
                 }
                 <View>
@@ -48,4 +47,14 @@ export default class EventDetails extends React.Component<Props,{}>{
             </View>
         );
     }
+}
+
+const formatUnixTimestamp = (ts: number): string => {
+    const d = new Date(ts * 1000);
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const hour = d.getHours();
+    const minute = d.getMinutes();
+    return year + "-" + month + "-" + day + " @ " + hour + ":" + minute;
 }
