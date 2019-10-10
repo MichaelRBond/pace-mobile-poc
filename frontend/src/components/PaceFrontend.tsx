@@ -1,10 +1,9 @@
 import { PaceBackendClient } from "external-clients/pacebackend";
 import { isNotNull, isNull, Nullable } from "nullable-ts";
-import { EventCreator } from "./EventCreator";
 import * as React from "react";
+import "../styles/pacefrontend.css";
+import { EventManager } from "./EventManager";
 import { Login } from "./Login";
-
-import "../styles/grapevine.css";
 
 interface Props {
   pacebackend: PaceBackendClient;
@@ -37,21 +36,22 @@ export class PaceFrontend extends React.Component<Props, State> {
         }
         {isNotNull(this.state.username) &&
           <div>
-            <EventCreator pacebackend={this.props.pacebackend} />
+            <EventManager pacebackend={this.props.pacebackend} />
           </div>
         }
       </div>
     );
   }
 
-  private async loginCallback(username: string, password: string): Promise<void> {
+  private async loginCallback(username: string, password: string): Promise<boolean> {
     const authResult = await this.props.pacebackend.authenticate(username, password);
     if (authResult) {
       this.setState({
         password,
         username,
       });
+      return true;
     }
-    return;
+    return false;
   }
 }

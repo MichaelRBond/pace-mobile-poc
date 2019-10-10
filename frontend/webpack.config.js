@@ -14,7 +14,7 @@ const paths = {
 const env = process.env.CONFIG_ENV || 'local';
 const config = require(`${paths.config}/${env}`);
 
-console.log("Building Grapevine RSS Reader with config: ", JSON.stringify(config, null, ' '));
+console.log("Building Pace Frontend with config: ", JSON.stringify(config, null, ' '));
 
 var publicPath = config.publicPath;
 

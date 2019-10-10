@@ -1,8 +1,8 @@
 import { PaceFrontend } from "components/PaceFrontend";
+import { PaceBackendClient } from "external-clients/pacebackend";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { HttpClient } from "./utils/http";
-import { PaceBackendClient } from "external-clients/pacebackend";
 
 declare var document: any;
 
