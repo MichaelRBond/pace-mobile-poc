@@ -7,22 +7,23 @@ export interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class EventDetails extends React.Component<Props, BroadcastedEvent>{
+export default class EventDetails extends React.Component<Props, BroadcastedEvent> {
     constructor(props: Props) {
         super(props);
         this.state = props.navigation.getParam("event");
+        console.log(this.state);
     }
 
     public render() {
         const event = this.state;
-        const broadCastDate = formatUnixTimestamp(event.date);
+        const createdDate = formatUnixTimestamp(event.created_date);
 
         let startDate: string;
         let endDate: string;
-        const isEvent = event.start_time != null && event.end_time != null;
+        const isEvent = event.event != null;
         if (isEvent) {
-            startDate = formatUnixTimestamp(event.start_time);
-            endDate = formatUnixTimestamp(event.end_time);
+            startDate = formatUnixTimestamp(event.event.start_time);
+            endDate = formatUnixTimestamp(event.event.end_time);
         }
 
         return (
@@ -31,7 +32,7 @@ export default class EventDetails extends React.Component<Props, BroadcastedEven
                     <Text>{event.subject}</Text>
                 </View>
                 <View>
-                    <Text>{broadCastDate}</Text>
+                    <Text>{createdDate}</Text>
                 </View>
                 {isEvent &&
                     <View>
