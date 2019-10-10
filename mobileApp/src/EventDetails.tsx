@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { BroadcastedEvent } from "./service";
 
@@ -26,7 +26,7 @@ export default class EventDetails extends React.Component<Props, BroadcastedEven
         }
 
         return (
-            <View>
+            <View style={styles.container}>
                 <View>
                     <Text>{event.subject}</Text>
                 </View>
@@ -57,4 +57,11 @@ const formatUnixTimestamp = (ts: number): string => {
     const hour = d.getHours();
     const minute = d.getMinutes();
     return year + "-" + month + "-" + day + " @ " + hour + ":" + minute;
-}
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 22,
+    },
+});
