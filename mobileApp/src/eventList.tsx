@@ -2,21 +2,22 @@ import {BroadcastedEvent, Service} from './service';
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
-import {EventDetails} from './eventDetails'
-import { NavigationActions } from 'react-navigation';
+import EventDetails from './EventDetails'
+import { NavigationActions, NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import { Card, CardItem, Body, Content } from 'native-base';
+
 
 const styles = StyleSheet.create({
     container: {
      flex: 1,
-     paddingTop: 22
+     paddingTop: 22,
     },
     item: {
       padding: 10,
       fontSize: 18,
       height: 44,
     },
-  })
-
+  });
 
 //   import Service from './service';
 //   import Communication from './service';
@@ -24,40 +25,50 @@ const styles = StyleSheet.create({
 //   import {Button, StyleSheet, Text, View} from 'react-native';
 
 export interface Props {
-    communications: Array<BroadcastedEvent>;
+    communications: BroadcastedEvent[];
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 interface State {
-    communications: Array<BroadcastedEvent>;
+    communications: BroadcastedEvent[];
 }
 
-const MainNavigator = createStackNavigator({
-    event: {screen: EventDetails}
-});
 
 
-  
 
-export class EventList extends React.Component<Props,State>{
-    constructor(props){
+
+export class EventList extends React.Component<Props, State> {
+    constructor(props) {
         super(props);
-        this.state = {communications: props.communications}
-
+        this.state = {communications: props.communications};
     }
 
-    render() {
-        console.log("HEREEE")
-        console.log(this.state.communications)
+    public onPress(item){
+        this.props.navigation.navigate('EventDetails', {event:item})
+    }
 
+    public render() {
         return (
           <View style={styles.container}>
-            <FlatList
-              data={this.state.communications}
-              renderItem={({item}) => <Text onPress={() => {}} style={styles.item} > {item.subject} </Text>}
-            />
+            <Content>
+          
+              {this.state.communications.map(item =>{
+                console.log(item)
+                return( 
+                <Card key={item.id.toString()}>
+                    <CardItem>
+                        <Body>
+                            <Text onPress={() => {this.onPress(item)}} style={styles.item}> 
+                                {item.subject} 
+                            </Text>
+                        </Body>
+                    </CardItem>
+                </Card>)
+
+            })}
+            </Content>
         </View>);
-    }   
+    }
 }
-    
-    
+
 export default EventList;

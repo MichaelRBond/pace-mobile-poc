@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import {Service} from './src/service'
-import {BroadcastedEvent} from './src/service'
-import EventList from './src/eventList'
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from "react-native-splash-screen";
+import EventList from "./src/eventList";
 import { LoadingView } from "./src/LoadingView";
-
+import {Service} from "./src/service";
+import {BroadcastedEvent} from "./src/service";
+import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
 
 interface Props {
-};
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
 interface State {
-  isLoading: boolean
-  eventsData: Array<BroadcastedEvent>;
+  isLoading: boolean;
+  eventsData: BroadcastedEvent[];
 }
 
 
@@ -26,31 +27,31 @@ export default class App extends Component<Props, State> {
     this.state = {
       eventsData: [],
       isLoading: true,
-    }
+    };
     this.getEventsData = this.getEventsData.bind(this);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     SplashScreen && SplashScreen.hide();
     this.getEventsData();
   }
 
-  getEventsData() {
+  public getEventsData() {
     const test = new Service();
     const data = test.fetchCommunications();
     this.setState({
       eventsData: data.broadCastedEvents,
-      isLoading: false
+      isLoading: false,
     });
   }
 
   public render() {
     const { isLoading } = this.state;
-    if(isLoading) {
-      return <LoadingView/>
+    if (isLoading) {
+      return <LoadingView/>;
     }
-    
-    return <EventList communications={this.state.eventsData}> </EventList>;
+
+    return <EventList navigation={this.props.navigation} communications={this.state.eventsData}> </EventList>;
 
   }
 }
