@@ -7,7 +7,9 @@ export const release: Config = {
 };
 
 export const dev: Config = {
-    serverHost: "192.168.1.14:3000",
+    // serverHost: "192.168.1.14:3000",
+    // serverHost: "localhost:3000",
+    serverHost: "192.241.138.158:3001",
 };
 
 export const get = (): Config => {
