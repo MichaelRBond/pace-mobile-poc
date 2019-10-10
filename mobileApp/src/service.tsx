@@ -8,16 +8,16 @@ export interface BroadcastedEvent {
     end_time?: number;
 }
 
-class Service {
-    constructor() {
+export class Service{
+    constructor(){
         /** noop */
     }
 
     public fetchCommunications() {
-        let test = {
+        return {
             meta: {
                 status: 200,
-                time: 0
+                time: 0,
             },
             broadCastedEvents: [
                 {
@@ -46,12 +46,9 @@ class Service {
                     expiration_date: 1570640984 + 60 * 60 * 24 * 7,
                     start_time: 1570640984 + 60 * 60 * 24 * 3,
                     end_time: 1570640984 + 60 * 60 * 24 * 3 + 60 * 60 * 2,
-                }
-            ]
-
+                },
+            ],
         };
-        return test.broadCastedEvents as BroadcastedEvent[];
     }
 }
 
-export default Service;

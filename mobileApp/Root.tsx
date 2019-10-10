@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 import App from "./App";
 import EventDetails from "./src/EventDetails";
 
