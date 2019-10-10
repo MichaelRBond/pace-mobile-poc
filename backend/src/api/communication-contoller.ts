@@ -71,6 +71,7 @@ export class CommunicationsController extends EndpointController {
       {
         method: "GET",
         options: {
+          auth: false,
           handler: this.getCommunications,
           response: {
             schema: joiCommunicationsGetResponse,
@@ -81,6 +82,7 @@ export class CommunicationsController extends EndpointController {
       {
         method: "GET",
         options: {
+          auth: false,
           handler: this.getCommunication,
           response: {
             schema: joiCommunicationGetResponse,

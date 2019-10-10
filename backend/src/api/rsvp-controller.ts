@@ -49,6 +49,7 @@ export class RsvpController extends EndpointController {
       {
         method: "POST",
         options: {
+          auth: false,
           handler: this.saveRsvp,
           response: {
             schema: joiRsvpResponse,
@@ -64,6 +65,7 @@ export class RsvpController extends EndpointController {
       {
         method: "DELETE",
         options: {
+          auth: false,
           handler: this.deleteRsvp,
           response: {
             schema: joiRsvpResponse,
@@ -79,6 +81,7 @@ export class RsvpController extends EndpointController {
       {
         method: "get",
         options: {
+          auth: false,
           handler: this.getRsvp,
           response: {
             schema: joiRsvpResponse,
