@@ -9,6 +9,7 @@ import { LoadingView } from "./src/LoadingView";
 import {Service} from "./src/service";
 import {BroadcastedEvent} from "./src/service";
 import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
+import OneSignal from "react-native-onesignal";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -23,6 +24,7 @@ interface State {
 export default class App extends Component<Props, State> {
 
   constructor(props: Props) {
+    OneSignal.init("c831b21b-810f-4b7f-8bfa-7cf2168665d7");
     super(props);
     this.state = {
       eventsData: [],
