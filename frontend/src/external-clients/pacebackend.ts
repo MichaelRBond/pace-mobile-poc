@@ -6,18 +6,33 @@ interface VerifyAuthenticationResponse {
 }
 
 export interface TaggedCommunication extends Communication {
-  id: string;
+  id: number;
 }
 
 export interface Communication {
-  subject: string;
   body: string;
+  event?: {
+    end_date: number;
+    start_date: number;
+  };
+  expiration_date: number;
+  subject: string;
+}
+
+export interface CommunicationPostMessage {
+  body: string;
+  event?: {
+    endDate: number;
+    startDate: number;
+  };
+  expirationDate: number;
+  subject: string;
 }
 
 export class PaceBackendClient {
 
   private static AUTH_URL: string = "/api/v1/account/verify";
-  private static COMMUNICATIONS_URL: string = "api/v1/communications";
+  private static COMMUNICATIONS_URL: string = "/api/v1/communications";
 
   private username: string;
   private password: string;
@@ -56,29 +71,36 @@ export class PaceBackendClient {
     return response.data;
   }
 
-  public async postCommunication(data: Communication): Promise<void> {
+  public async postCommunication(data: Communication): Promise<TaggedCommunication> {
     const url = `${this.endpoint}${PaceBackendClient.COMMUNICATIONS_URL}`;
     const requestParams: HttpRequestConfig = {
       password: this.password,
       url,
       username: this.username,
     };
-    // TODO: Any response?
-    const response = await this.httpClient.post<Communication, void>(data, requestParams);
+    const response = await this.httpClient.post<CommunicationPostMessage, TaggedCommunication>({
+      body: data.body,
+      event: data.event == null ? undefined : {
+        endDate: data.event.end_date,
+        startDate: data.event.start_date,
+      },
+      expirationDate: data.expiration_date,
+      subject: data.subject,
+    }, requestParams);
     if (response.status !== 200) {
       throw new Error(`Failed to post communication`);
     }
+    return response.data;
   }
 
-  public async deleteCommunication(data: Communication): Promise<void> {
-    const url = `${this.endpoint}${PaceBackendClient.COMMUNICATIONS_URL}`;
+  public async deleteCommunication(id: number): Promise<void> {
+    const url = `${this.endpoint}${PaceBackendClient.COMMUNICATIONS_URL}/${id}`;
     const requestParams: HttpRequestConfig = {
       password: this.password,
       url,
       username: this.username,
     };
-    // TODO: Any response? All of this really.
-    const response = await this.httpClient.delete<Communication, void>(requestParams, data);
+    const response = await this.httpClient.delete<Communication, void>(requestParams);
     if (response.status !== 200) {
       throw new Error(`Failed to delete communication`);
     }

@@ -1,4 +1,4 @@
-import { Button, Card, ControlGroup, FormGroup, InputGroup, Intent, Tag, Tooltip } from "@blueprintjs/core";
+import { Button, ControlGroup, FormGroup, InputGroup, Intent, Tag, Tooltip } from "@blueprintjs/core";
 import * as React from "react";
 
 interface Props {
@@ -40,7 +40,6 @@ export class Login extends React.Component<Props, State> {
 
     return (
       <div id="login" style={{ maxWidth: "50vh", margin: "auto" }}>
-        <Card>
           <form onSubmit={(e: any) => this.submit(e)}>
             <ControlGroup
               vertical={true}
@@ -75,7 +74,6 @@ export class Login extends React.Component<Props, State> {
               <Button type="submit">Login</Button>
             </ControlGroup>
           </form>
-        </Card>
         <div style={{ textAlign: "center", marginTop: "1em" }}>
           {this.state.error && <Tag intent={Intent.DANGER}>{"Invalid Username/Password"}</Tag>}
         </div>
