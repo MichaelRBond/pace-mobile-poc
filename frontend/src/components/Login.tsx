@@ -1,5 +1,6 @@
-import { Button, ControlGroup, FormGroup, InputGroup, Intent, Tag, Tooltip } from "@blueprintjs/core";
+import { Button, ControlGroup, FormGroup, InputGroup, Intent, Tooltip } from "@blueprintjs/core";
 import * as React from "react";
+import { AppToaster } from "./PaceFrontend";
 
 interface Props {
   loginCallback: (username: string, password: string) => Promise<boolean>;
@@ -9,14 +10,12 @@ interface State {
   password: string;
   showPassword: boolean;
   username: string;
-  error: boolean;
 }
 
 export class Login extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      error: false,
       password: "",
       showPassword: false,
       username: "",
@@ -74,9 +73,6 @@ export class Login extends React.Component<Props, State> {
               <Button type="submit">Login</Button>
             </ControlGroup>
           </form>
-        <div style={{ textAlign: "center", marginTop: "1em" }}>
-          {this.state.error && <Tag intent={Intent.DANGER}>{"Invalid Username/Password"}</Tag>}
-        </div>
       </div>
     );
   }
@@ -85,7 +81,10 @@ export class Login extends React.Component<Props, State> {
     e.preventDefault();
     const login = await this.props.loginCallback(this.state.username, this.state.password);
     if (!login) {
-      this.setState({ error: true });
+      AppToaster.show({
+        intent: Intent.DANGER,
+        message: "Invalid Username or Password",
+      });
     }
   }
 

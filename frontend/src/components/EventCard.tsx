@@ -15,10 +15,10 @@ export const EventCard = ({ communication, onDelete }: Props) => (
             <div className="event-title-spacer" />
             {communication.event != null && <div>
                 <Tag style={{ marginRight: "1em" }} intent={Intent.NONE}>{"From: "}{
-                    new Date(communication.event.start_date * 1000).toDateString()
+                    new Date(communication.event.start_date * 1000).toLocaleString()
                 }</Tag>
                 <Tag intent={Intent.NONE}>{"Until: "}{
-                    new Date(communication.event.end_date * 1000).toDateString()
+                    new Date(communication.event.end_date * 1000).toLocaleString()
                 }</Tag>
             </div>}
             <div className="event-title-spacer" />

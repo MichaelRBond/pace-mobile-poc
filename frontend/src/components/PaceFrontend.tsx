@@ -1,3 +1,4 @@
+import { Position, Toaster } from "@blueprintjs/core";
 import { PaceBackendClient } from "external-clients/pacebackend";
 import { isNotNull, isNull, Nullable } from "nullable-ts";
 import * as React from "react";
@@ -13,6 +14,10 @@ interface State {
   password: Nullable<string>;
   username: Nullable<string>;
 }
+
+export const AppToaster = Toaster.create({
+  position: Position.BOTTOM,
+});
 
 export class PaceFrontend extends React.Component<Props, State> {
   constructor(props: Props) {
