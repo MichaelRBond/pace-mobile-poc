@@ -8,13 +8,13 @@ export interface Communication{
     end_time: number,
 }
 
-class Service{
+export class Service{
     constructor(){
 
     }
 
     public fetchCommunications() {
-        let test =  {
+        return {
             meta:{
                 status:200,
                 time:0
@@ -50,8 +50,6 @@ class Service{
             ] 
 
         };
-        test.communications as Array<Communication>;
     }
 }
 
-export default Service;

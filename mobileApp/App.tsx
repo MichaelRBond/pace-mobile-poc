@@ -4,7 +4,7 @@ import {
   Text,
 } from 'react-native';
 
-import Service from './src/service'
+import {Service} from './src/service'
 import EventList from './src/eventList'
 import SplashScreen from 'react-native-splash-screen'
 
@@ -23,6 +23,7 @@ export default class App extends Component<any, any> {
   public render() {
     let test = new Service();
     let data = test.fetchCommunications()
-    return <EventList></EventList>;
+    console.log("BLAH BLAH")
+    return <EventList communications={data.communications}> </EventList>;
   }
 }
