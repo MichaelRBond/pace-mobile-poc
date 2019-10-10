@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-export interface BroadcastedEvent {
+export interface Communication {
     id: number;
     subject: string;
     body: string;
@@ -17,8 +17,8 @@ export class Service {
         /** noop */
     }
 
-    public async fetchCommunications(): Promise<BroadcastedEvent[]> {
-        const resp: AxiosResponse<BroadcastedEvent[]> =
+    public async fetchCommunications(): Promise<Communication[]> {
+        const resp: AxiosResponse<Communication[]> =
             await axios.get("http://192.168.1.14:3000/api/v1/communications");
         return resp.data;
     }

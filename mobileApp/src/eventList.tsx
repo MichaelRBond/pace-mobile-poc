@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { ColorHeader } from "./Header";
-import { BroadcastedEvent } from "./service";
+import { Communication } from "./service";
 
 const styles = StyleSheet.create({
     container: {
@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
 });
 
 export interface Props {
-    communications: BroadcastedEvent[];
+    communications: Communication[];
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
 interface State {
-    communications: BroadcastedEvent[];
+    communications: Communication[];
 }
 
 export class EventList extends React.Component<Props, State> {

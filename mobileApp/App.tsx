@@ -4,14 +4,14 @@ import SplashScreen from "react-native-splash-screen";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import EventList from "./src/eventList";
 import { LoadingView } from "./src/LoadingView";
-import { BroadcastedEvent, Service } from "./src/service";
+import { Communication, Service } from "./src/service";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 interface State {
   isLoading: boolean;
-  eventsData: BroadcastedEvent[];
+  eventsData: Communication[];
 }
 
 export default class App extends Component<Props, State> {
