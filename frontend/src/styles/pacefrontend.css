@@ -21,6 +21,11 @@
   order: 2;
 }
 
+.date-picker {
+  max-width: fit-content;
+  margin: auto;
+}
+
 .feed-menu-container {
   display: inline-block;
 }
@@ -34,6 +39,34 @@
   border-style: solid;
   border-color: lightgrey;
   padding: 1em;
+}
+
+#event-list {
+  padding: 0;
+  margin: 0;
+}
+
+#event-list > * {
+  margin-bottom: 1em;
+}
+
+.event-title {
+  display: flex;
+}
+.event-title > h5 {
+  margin-left: 0.5em; 
+}
+.event-title > .event-title-spacer {
+  flex: 1
+}
+
+.display-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.formated-paragraph {
+  white-space: pre-wrap;
 }
 
 .pace-menu {

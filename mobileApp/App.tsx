@@ -1,25 +1,18 @@
 import React, { Component } from "react";
-import {
-  Platform,
-} from "react-native";
-
+import OneSignal from "react-native-onesignal";
 import SplashScreen from "react-native-splash-screen";
+import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import EventList from "./src/eventList";
 import { LoadingView } from "./src/LoadingView";
-import {Service} from "./src/service";
-import {BroadcastedEvent} from "./src/service";
-import { NavigationScreenProp, NavigationState, NavigationParams } from "react-navigation";
-import OneSignal from "react-native-onesignal";
+import { Communication, Service } from "./src/service";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 interface State {
   isLoading: boolean;
-  eventsData: BroadcastedEvent[];
+  eventsData: Communication[];
 }
-
-
 
 export default class App extends Component<Props, State> {
 
@@ -34,15 +27,16 @@ export default class App extends Component<Props, State> {
   }
 
   public componentDidMount() {
+    // tslint:disable-next-line: no-unused-expression
     SplashScreen && SplashScreen.hide();
     this.getEventsData();
   }
 
-  public getEventsData() {
-    const test = new Service();
-    const data = test.fetchCommunications();
+  public async getEventsData() {
+    const service = new Service();
+    const data = await service.fetchCommunications();
     this.setState({
-      eventsData: data.broadCastedEvents,
+      eventsData: data,
       isLoading: false,
     });
   }
@@ -54,6 +48,5 @@ export default class App extends Component<Props, State> {
     }
 
     return <EventList navigation={this.props.navigation} communications={this.state.eventsData}> </EventList>;
-
   }
 }

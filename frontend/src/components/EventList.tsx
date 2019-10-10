@@ -1,50 +1,24 @@
-import { Card, Intent, Tag } from "@blueprintjs/core";
-import { PaceBackendClient, TaggedCommunication } from "external-clients/pacebackend";
+import { TaggedCommunication } from "external-clients/pacebackend";
 import * as React from "react";
+import { EventCard } from "./EventCard";
 
 interface Props {
-  pacebackend: PaceBackendClient;
-}
-
-interface State {
   communications: TaggedCommunication[];
-  error: boolean;
+  deleteCallback: (id: number) => void;
 }
 
-export class EventList extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      communications: [],
-      error: false,
-    };
-  }
-
-  public componentDidMount() {
-      this.loadData();
-  }
-
+export class EventList extends React.Component<Props, {}> {
   public render() {
     return (
-        <div>
-            {this.state.error && <Tag intent={Intent.DANGER}>{"Error"}</Tag>}
-            {this.state.communications.map((communication) => (
-                <Card key={communication.id}>
-                    {communication.subject}
-                </Card>
-            ))}
-        </div>
+      <div id={"event-list"}>
+        {this.props.communications.map((communication) => (
+          <EventCard
+            communication={communication}
+            key={communication.id}
+            onDelete={() => this.props.deleteCallback(communication.id)}
+          />
+        ))}
+      </div>
     );
-  }
-
-  private async loadData(): Promise<void> {
-    this.setState({error: false, communications: []});
-    try {
-        const communications: TaggedCommunication[] = await this.props.pacebackend.getCommunications();
-        this.setState({communications});
-    } catch {
-        this.setState({error: true});
-    }
   }
 }

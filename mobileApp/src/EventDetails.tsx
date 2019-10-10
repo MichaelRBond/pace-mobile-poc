@@ -1,37 +1,37 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
-import { BroadcastedEvent } from "./service";
+import { Communication } from "./service";
 
 export interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-export default class EventDetails extends React.Component<Props, BroadcastedEvent>{
+export default class EventDetails extends React.Component<Props, Communication> {
     constructor(props: Props) {
         super(props);
         this.state = props.navigation.getParam("event");
     }
 
     public render() {
-        const event = this.state;
-        const broadCastDate = formatUnixTimestamp(event.date);
+        const communication = this.state;
+        const createdDate = formatUnixTimestamp(communication.created_date);
 
         let startDate: string;
         let endDate: string;
-        const isEvent = event.start_time != null && event.end_time != null;
+        const isEvent = communication.event != null;
         if (isEvent) {
-            startDate = formatUnixTimestamp(event.start_time);
-            endDate = formatUnixTimestamp(event.end_time);
+            startDate = formatUnixTimestamp(communication.event.start_time);
+            endDate = formatUnixTimestamp(communication.event.end_time);
         }
 
         return (
-            <View>
+            <View style={styles.container}>
                 <View>
-                    <Text>{event.subject}</Text>
+                    <Text>{communication.subject}</Text>
                 </View>
                 <View>
-                    <Text>{broadCastDate}</Text>
+                    <Text>{createdDate}</Text>
                 </View>
                 {isEvent &&
                     <View>
@@ -42,7 +42,7 @@ export default class EventDetails extends React.Component<Props, BroadcastedEven
                     <Text>--- Message ---</Text>
                 </View>
                 <View>
-                    <Text>{event.body}</Text>
+                    <Text>{communication.body}</Text>
                 </View>
             </View>
         );
@@ -57,4 +57,11 @@ const formatUnixTimestamp = (ts: number): string => {
     const hour = d.getHours();
     const minute = d.getMinutes();
     return year + "-" + month + "-" + day + " @ " + hour + ":" + minute;
-}
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 22,
+    },
+});
