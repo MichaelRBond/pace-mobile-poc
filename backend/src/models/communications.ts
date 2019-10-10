@@ -1,5 +1,7 @@
 import { isNullOrUndefined, Nullable, orElseThrow } from "nullable-ts";
+import { OneSignalClient } from "../clients/onesignal";
 import { CommunicationsDao } from "../dao/communications";
+import { logger } from "../utils/logger";
 
 export enum CommunicationUrgency {
   NONE,
@@ -38,7 +40,7 @@ export interface CommunicationGetResponse {
 }
 
 export class CommunicationsModel {
-  constructor(private communicationsDao: CommunicationsDao) {}
+  constructor(private communicationsDao: CommunicationsDao, private onesignal: OneSignalClient) {}
 
   public static toApiResponse(communication: Communication): CommunicationGetResponse {
     return {
@@ -65,6 +67,11 @@ export class CommunicationsModel {
   public async saveCommunication(communicationBase: CommunicationBase): Promise<Communication> {
     const communicationNullable = await this.communicationsDao.save(communicationBase);
     const communication = orElseThrow(communicationNullable, new Error("Error saving communication"));
+    try {
+      await this.onesignal.createNotification("You have a new message from Pace");
+    } catch (err) {
+      logger.error(`Error sending push notification`);
+    }
     return communication;
   }
 

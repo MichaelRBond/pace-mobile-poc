@@ -1,9 +1,9 @@
 import {BroadcastedEvent, Service} from './service';
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import {createStackNavigator} from 'react-navigation-stack';
+
 import EventDetails from './EventDetails'
-import { NavigationActions, NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
+import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 import { Card, CardItem, Body, Content } from 'native-base';
 
 

@@ -15,6 +15,11 @@ export interface Config {
   };
   logger: LoggerConfig;
   mysql: ConnectionConfig;
+  onesignal: {
+    apiKey: string;
+    appId: string;
+    endpoint: string;
+  };
 }
 
 export const common: Config = {
@@ -34,5 +39,10 @@ export const common: Config = {
     host: "127.0.0.1",
     port: 3306,
     user: "pace",
+  },
+  onesignal: {
+    apiKey: process.env.ONESIGNAL_APIKEY || "",
+    appId: process.env.ONESIGNAL_APPID || "",
+    endpoint: "https://onesignal.com",
   },
 };

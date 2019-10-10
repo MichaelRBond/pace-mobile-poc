@@ -8,10 +8,21 @@ export interface BroadcastedEvent {
     end_time?: number;
 }
 
+const str = `_Compact style:_
+
+Term 1
+  ~ Definition 1
+
+Term 2
+  ~ Definition 2a
+  ~ Definition 2b`
+
 export class Service {
     constructor() {
         /** noop */
     }
+
+
 
     public fetchCommunications() {
         return {
