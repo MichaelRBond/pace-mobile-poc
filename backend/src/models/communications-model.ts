@@ -1,31 +1,40 @@
 import { isNullOrUndefined, orElseThrow } from "nullable-ts";
 import { CommunicationsDao } from "../dao/communications-dao";
 
+export enum CommunicationUrgency {
+  NONE,
+  LOW,
+  MEDIUM,
+  HIGH,
+  CRITICAL,
+}
+
 export interface CommunicationBase {
   body: string;
   event?: {
-    endTime: number;
-    startTime: number;
+    endDate: number;
+    startDate: number;
   };
   expirationDate: number;
   subject: string;
+  urgency?: CommunicationUrgency;
+}
+
+export interface Communication extends CommunicationBase {
+  id: number;
+  createdDate: number;
 }
 
 export interface CommunicationsGetResponse {
   body: string;
   created_date: number;
   event?: {
-    end_time: number;
-    start_time: number;
+    end_date: number;
+    start_date: number;
   };
   expiration_date: number;
   id: number;
   subject: string;
-}
-
-export interface Communication extends CommunicationBase {
-  id: number;
-  createdDate: number;
 }
 
 export class CommunicationsModel {
@@ -37,8 +46,8 @@ export class CommunicationsModel {
       body: communication.body,
       created_date: communication.createdDate,
       event: isNullOrUndefined(communication.event) ? undefined : {
-        end_time: communication.event.endTime,
-        start_time: communication.event.startTime,
+        end_date: communication.event.endDate,
+        start_date: communication.event.startDate,
       },
       expiration_date: communication.expirationDate,
       id: communication.id,
