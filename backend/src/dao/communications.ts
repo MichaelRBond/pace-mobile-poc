@@ -1,6 +1,6 @@
 import { isNullOrUndefined, Nullable } from "nullable-ts";
 import { MySqlClient } from "../clients/mysql-client";
-import { Communication, CommunicationBase } from "../models/communications";
+import { Communication, CommunicationBase, CommunicationUrgency } from "../models/communications";
 import { DateTime } from "../utils/date-time";
 
 export class CommunicationsDao {
@@ -33,7 +33,7 @@ export class CommunicationsDao {
     const createdDate = this.dateTime.dateNoWInSeconds();
     const startDate = communication.event && communication.event.startDate || null;
     const endDate = communication.event && communication.event.endDate || null;
-    const urgency = communication.urgency || null;
+    const urgency = communication.urgency || CommunicationUrgency.NONE;
 
     const result = await mysql.insertUpdate(sql, [communication.body, communication.subject, createdDate,
       communication.expirationDate, startDate, endDate, urgency]);

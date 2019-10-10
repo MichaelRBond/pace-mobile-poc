@@ -37,6 +37,7 @@ export interface CommunicationGetResponse {
   expiration_date: number;
   id: number;
   subject: string;
+  urgency?: CommunicationUrgency;
 }
 
 export class CommunicationsModel {
@@ -53,6 +54,7 @@ export class CommunicationsModel {
       expiration_date: communication.expirationDate,
       id: communication.id,
       subject: communication.subject,
+      urgency: communication.urgency,
     };
   }
 

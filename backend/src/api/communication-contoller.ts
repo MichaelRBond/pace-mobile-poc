@@ -18,6 +18,18 @@ const joiCommunicationGetResponse = Joi.object({
   expiration_date: Joi.number(),
   id: Joi.number(),
   subject: Joi.string(),
+  urgency: Joi.number().optional(),
+});
+
+const joiCommunicationPayload = Joi.object({
+  body: Joi.string(),
+  event: Joi.object({
+    endDate: Joi.number(),
+    startDate: Joi.number(),
+  }).optional(),
+  expirationDate: Joi.number(),
+  subject: Joi.string(),
+  urgency: Joi.number().optional(),
 });
 
 const joiCommunicationsGetResponse = Joi.array().items(joiCommunicationGetResponse);
@@ -101,6 +113,9 @@ export class CommunicationsController extends EndpointController {
           handler: this.saveCommunication,
           response: {
             schema: joiCommunicationGetResponse,
+          },
+          validate: {
+            payload: joiCommunicationPayload,
           },
         },
         path: "/api/v1/communications",
