@@ -1,20 +1,20 @@
-import Communication from './service';
-import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { BroadcastedEvent } from "./service";
 
 export interface Props {
-    communication: Communication
+    event: BroadcastedEvent;
 }
 
-interface State {
-}
-
-export default class EventDetails extends React.PureComponent<Props, State> {
+export default class EventDetails extends React.PureComponent<Props, {}> {
     constructor(props: Props) {
-        super(props)
+        super(props);
     }
 
     public render() {
-        return <div></div>
+        return (
+            <div>
+                <h1>{this.props.event.subject}</h1>
+            </div>
+        );
     }
 }
