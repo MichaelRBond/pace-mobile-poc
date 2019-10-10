@@ -13,13 +13,13 @@ export interface Communication {
 }
 
 export class Service {
-    constructor() {
-        /** noop */
-    }
+    constructor(
+        private host: string,
+    ) { }
 
     public async fetchCommunications(): Promise<Communication[]> {
         const resp: AxiosResponse<Communication[]> =
-            await axios.get("http://192.168.1.14:3000/api/v1/communications");
+            await axios.get(`http://${this.host}/api/v1/communications`);
         return resp.data;
     }
 }
