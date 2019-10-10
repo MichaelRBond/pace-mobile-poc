@@ -1,6 +1,8 @@
 export enum thrownErrMsg {
   accountAdd = "Error adding account with username=:username:",
   communicationSaveError = "Error saving feed",
+  communicationNotFound = "Could not find communication with id=:id:",
+  communicationDelete = "Could not delete communication with id=:id:",
   testing = "This is a :adjective: :noun:. It is for testing :adjective: tests",
 }
 

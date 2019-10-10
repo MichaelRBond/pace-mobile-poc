@@ -1,4 +1,4 @@
-import { isNullOrUndefined, orElseThrow } from "nullable-ts";
+import { isNullOrUndefined, Nullable, orElseThrow } from "nullable-ts";
 import { CommunicationsDao } from "../dao/communications-dao";
 
 export enum CommunicationUrgency {
@@ -25,7 +25,7 @@ export interface Communication extends CommunicationBase {
   createdDate: number;
 }
 
-export interface CommunicationsGetResponse {
+export interface CommunicationGetResponse {
   body: string;
   created_date: number;
   event?: {
@@ -38,10 +38,9 @@ export interface CommunicationsGetResponse {
 }
 
 export class CommunicationsModel {
-  constructor(private communicationsDao: CommunicationsDao) {
-  }
+  constructor(private communicationsDao: CommunicationsDao) {}
 
-  public static toApiResponse(communication: Communication): CommunicationsGetResponse {
+  public static toApiResponse(communication: Communication): CommunicationGetResponse {
     return {
       body: communication.body,
       created_date: communication.createdDate,
@@ -55,12 +54,22 @@ export class CommunicationsModel {
     };
   }
 
-  public async saveCommunication(communication: CommunicationBase) {
-    const communicationIdNullable = await this.communicationsDao.save(communication);
-    if (isNullOrUndefined(communicationIdNullable)) {
-      return null;
-    }
-    const communicationId = orElseThrow(communicationIdNullable, new Error("Error saving communication"));
-    return this.communicationsDao.getById(communicationId);
+  public async getCommunication(id: number): Promise<Nullable<Communication>> {
+    return await this.communicationsDao.getById(id);
+  }
+
+  public async getCommunications(): Promise<Communication[]> {
+    return await this.communicationsDao.getCommunications();
+  }
+
+  public async saveCommunication(communicationBase: CommunicationBase): Promise<Communication> {
+    const communicationNullable = await this.communicationsDao.save(communicationBase);
+    const communication = orElseThrow(communicationNullable, new Error("Error saving communication"));
+    return communication;
+  }
+
+  public async deleteCommunication(id: number): Promise<void> {
+    await this.communicationsDao.delete(id);
+    return;
   }
 }

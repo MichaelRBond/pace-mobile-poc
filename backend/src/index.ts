@@ -9,15 +9,15 @@ import { AccountModel } from "./models/accounts";
 import { CommunicationsModel } from "./models/communications-model";
 import { EndpointController } from "./models/endpoint-controller";
 import { Authentication } from "./utils/authentication";
-// import { DateTime } from "./utils/date-time";
+import { DateTime } from "./utils/date-time";
 // import { Http } from "./utils/http";
 import { logger } from "./utils/logger";
 
-// const datetime = new DateTime();
+const datetime = new DateTime();
 // const http = new Http();
 
 const accountDao = new AccountDao(mysqlClientProvider);
-const communicationsDao = new CommunicationsDao(mysqlClientProvider);
+const communicationsDao = new CommunicationsDao(mysqlClientProvider, datetime);
 
 const accountModel = new AccountModel(accountDao);
 const communicationsModel = new CommunicationsModel(communicationsDao);
