@@ -35,6 +35,11 @@ export class Service {
     }
 
     public async saveRsvp(id: number, val: boolean): Promise<void> {
+        if (val) {
+            axios.post(`http://${this.host}/api/v1/rsvp/${id}`);
+        } else {
+            axios.delete(`http://${this.host}/api/v1/rsvp/${id}`);
+        }
         await AsyncStorage.setItem(`rsvp.${id}`, `${val}`);
     }
 }
