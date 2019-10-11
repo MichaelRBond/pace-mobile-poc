@@ -1,28 +1,29 @@
 "use strict";
 
+import { Icon } from "native-base";
+import React from "react";
+import { StyleSheet, Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import App from "./App";
-import EventDetails from "./src/EventDetails";
-import { About } from "./src/About";
 import { Enum } from "typescript-string-enums";
-import { Icon } from "native-base";
-import { Text, StyleSheet } from "react-native";
-import React, { Component } from "react";
+import App from "./App";
+import { About } from "./src/About";
 import { Donate } from "./src/Donate";
+import EventDetails from "./src/EventDetails";
 
 interface TabDetails {
   name: string;
   icon: string;
+  iconType: "AntDesign" | "Entypo" | "EvilIcons" | "Feather" | "FontAwesome" | "FontAwesome5" | "Foundation" | "Ionicons" | "MaterialCommunityIcons" | "MaterialIcons" | "Octicons" | "SimpleLineIcons" | "Zocial";
 }
 
 const Routes = Enum(
   "communication",
   "communicationDetails",
   "about",
-  "donate"
-)
+  "donate",
+);
 
 const createTabStack = (routeName: string, screen: any) => createStackNavigator({
   [routeName]: { screen },
@@ -34,13 +35,13 @@ const createTabStack = (routeName: string, screen: any) => createStackNavigator(
 export function getTabDetails(routeName: string): TabDetails {
   switch (routeName) {
     case Routes.communication:
-      return {name: "Posts", icon: "event-note"};
+      return { name: "Posts", icon: "event-note", iconType: "MaterialIcons" };
     case Routes.about:
-      return {name: "About", icon: "people"};
+      return { name: "About", icon: "people", iconType: "MaterialIcons" };
     case Routes.donate:
-        return {name: "Donate", icon: "handshake"};
+      return { name: "Donate", icon: "hands", iconType: "FontAwesome5" };
     default:
-      return {name: "?", icon: "exclefile1"};
+      return { name: "?", icon: "exclefile1", iconType: "MaterialIcons" };
   }
 }
 
@@ -55,13 +56,12 @@ const HomeTabsNavigator = createBottomTabNavigator(
       const { routeName } = navigation.state;
       const textIconColor = (focused: boolean) => focused ? "#364BC4" : "#8a8a8f";
       return {
-        
-        tabBarIcon: ({focused}) => {
-          const { icon, } = getTabDetails(routeName);
-          return <Icon name={icon} style={styles.base} type="MaterialIcons" color={textIconColor(focused)}/>;
+        tabBarIcon: ({ focused }) => {
+          const { icon, iconType } = getTabDetails(routeName);
+          return <Icon name={icon} style={styles.base} type={iconType} color={textIconColor(focused)} />;
         },
-        tabBarLabel: ({focused}) => (
-          <Text style={{color: textIconColor(focused), fontSize: 13}}>{getTabDetails(routeName).name}</Text>
+        tabBarLabel: ({ focused }) => (
+          <Text style={{ color: textIconColor(focused), fontSize: 13 }}>{getTabDetails(routeName).name}</Text>
         ),
       };
     },
@@ -77,10 +77,9 @@ const HomeTabsNavigator = createBottomTabNavigator(
   },
 );
 
-
 const RootNavigator = createStackNavigator({
-  CommunicationsStack: {screen:HomeTabsNavigator, navigationOptions:{title:"Back"}},
-  EventDetails: {screen: EventDetails, navigationOptions:{title:"Event Details"}},
+  CommunicationsStack: { screen: HomeTabsNavigator, navigationOptions: { title: "PACE Enterprise" } },
+  EventDetails: { screen: EventDetails, navigationOptions: { title: "Event Details" } },
 }, {
   headerMode: "float",
   headerBackgroundTransitionPreset: "fade",

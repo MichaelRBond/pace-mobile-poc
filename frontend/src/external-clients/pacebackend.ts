@@ -121,7 +121,7 @@ export class PaceBackendClient {
     };
     const response = await this.httpClient.get<RsvpResponse>(requestParams);
     if (response.status !== 200) {
-      throw new Error(`Failed to post communication`);
+      throw new Error(`Failed to get rsvp count`);
     }
     return response.data;
   }
