@@ -53,8 +53,9 @@ export default class App extends Component<Props, State> {
     }
 
     return <EventList
-      navigation={this.props.navigation}
-      communications={this.state.eventsData}
-      service={this.state.service}> </EventList>;
+              navigation={this.props.navigation}
+              communications={this.state.eventsData}
+              service={this.state.service}
+            />;
   }
 }
