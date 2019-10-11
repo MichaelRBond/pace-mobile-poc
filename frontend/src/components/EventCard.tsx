@@ -36,7 +36,7 @@ export const EventCard = ({ communication, onDelete, getRSVP, rsvpCount }: Props
                 >
                     {"Check RSVP"}
                 </Button>}
-                {rsvpCount != null && <Tag style={{marginLeft:"1em"}}intent={Intent.PRIMARY}>
+                {rsvpCount != null && <Tag style={{marginLeft: "1em"}}intent={Intent.PRIMARY}>
                     {`${rsvpCount} RSVPs`}
                 </Tag>}
             </div>

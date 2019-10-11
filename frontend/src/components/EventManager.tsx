@@ -22,8 +22,8 @@ export class EventManager extends React.Component<Props, State> {
 
     this.state = {
       communications: [],
-      rsvps: {},
       error: false,
+      rsvps: {},
     };
   }
 
