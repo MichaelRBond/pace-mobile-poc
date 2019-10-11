@@ -40,6 +40,8 @@ target 'mobileApp' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'mobileAppTests' do
     inherit! :search_paths
     # Pods for testing
