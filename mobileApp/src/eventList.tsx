@@ -37,7 +37,7 @@ export class EventList extends React.Component<Props, State> {
     public render() {
         return (
             <View style={styles.container}>
-                <ColorHeader />
+                <ColorHeader title={"Posts"}/>
                 <Content>
                     {this.state.communications.map((item) => {
                         return (

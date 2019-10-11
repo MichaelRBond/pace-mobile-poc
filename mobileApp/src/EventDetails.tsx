@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { Communication } from "./service";
+import { ColorHeader } from "./Header";
 
 export interface Props {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -27,6 +28,7 @@ export default class EventDetails extends React.Component<Props, Communication> 
 
         return (
             <View style={styles.container}>
+                <ColorHeader title={communication.subject}/>
                 <View>
                     <Text>{communication.subject}</Text>
                 </View>

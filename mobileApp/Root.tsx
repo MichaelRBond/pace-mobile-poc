@@ -10,6 +10,7 @@ import { Enum } from "typescript-string-enums";
 import { Icon } from "native-base";
 import { Text, StyleSheet } from "react-native";
 import React, { Component } from "react";
+import { Donate } from "./src/Donate";
 
 interface TabDetails {
   name: string;
@@ -19,7 +20,8 @@ interface TabDetails {
 const Routes = Enum(
   "communication",
   "communicationDetails",
-  "about"
+  "about",
+  "donate"
 )
 
 const createTabStack = (routeName: string, screen: any) => createStackNavigator({
@@ -35,6 +37,8 @@ export function getTabDetails(routeName: string): TabDetails {
       return {name: "Posts", icon: "event-note"};
     case Routes.about:
       return {name: "About", icon: "people"};
+    case Routes.donate:
+        return {name: "Donate", icon: "handshake"};
     default:
       return {name: "?", icon: "exclefile1"};
   }
@@ -44,12 +48,14 @@ const HomeTabsNavigator = createBottomTabNavigator(
   {
     [Routes.communication]: createTabStack(Routes.communication, App),
     [Routes.about]: createTabStack(Routes.about, About),
+    [Routes.donate]: createTabStack(Routes.donate, Donate),
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state;
       const textIconColor = (focused: boolean) => focused ? "#364BC4" : "#8a8a8f";
       return {
+        
         tabBarIcon: ({focused}) => {
           const { icon, } = getTabDetails(routeName);
           return <Icon name={icon} style={styles.base} type="MaterialIcons" color={textIconColor(focused)}/>;
@@ -73,10 +79,12 @@ const HomeTabsNavigator = createBottomTabNavigator(
 
 
 const RootNavigator = createStackNavigator({
-  CommunicationsStack: HomeTabsNavigator,
-  EventDetails: {screen: EventDetails},
+  CommunicationsStack: {screen:HomeTabsNavigator, navigationOptions:{title:"Pace"}},
+  EventDetails: {screen: EventDetails, navigationOptions:{title:"Event Details"}},
 }, {
-  headerMode: "none",
+  headerMode: "float",
+  headerBackgroundTransitionPreset: "fade",
+
 });
 
 const styles = StyleSheet.create({
