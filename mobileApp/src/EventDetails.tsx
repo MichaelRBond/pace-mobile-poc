@@ -1,8 +1,9 @@
 import { Body, Card, CardItem, Button, Icon } from "native-base";
 import React from "react";
 import { StyleSheet, Text, View, Alert } from "react-native";
-import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
+import { NavigationParams, NavigationScreenProp, NavigationState, ScrollView } from "react-navigation";
 import { Communication, Service } from "./service";
+import { tsPropertySignature } from "@babel/types";
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
@@ -43,29 +44,31 @@ export default class EventDetails extends React.Component<Props, State> {
 
         return (
             <View style={styles.container}>
-                <Card style={styles.card}>
-                    <CardItem style={styles.cardItem}>
-                        <Body>
-                            <Text style={styles.subjectText}>
-                                {communication.subject}
-                            </Text>
-                        </Body>
-                    </CardItem>
-                    <View style={styles.row}>
-                        <Text style={styles.posted}>posted at: </Text>
-                        <Text style={styles.dateText}>{createdDate}</Text>
-                    </View>
-                    <Text style={styles.eventDetails}>Event Details :</Text>
-                    <Text style={styles.messageBody}>{communication.body}</Text>
-                    {isEvent &&
-                        <View style={[styles.row, styles.dateTimeContainer]}>
-                            <DateComponent startDate={communication.event.start_date} />
-                            <TimeComponent startDate={communication.event.start_date} endDate={communication.event.end_date} />
-                            <RSVPComponent onRSVPPressed={() => this.onRSVPPressed()} />
+                <ScrollView>
+                    <Card style={styles.card}>
+                        <CardItem style={styles.cardItem}>
+                            <Body>
+                                <Text style={styles.subjectText}>
+                                    {communication.subject}
+                                </Text>
+                            </Body>
+                        </CardItem>
+                        <View style={styles.row}>
+                            <Text style={styles.posted}>posted at: </Text>
+                            <Text style={styles.dateText}>{createdDate}</Text>
                         </View>
-                    }
-                    {this.state.communication.rsvp && <Text style={styles.successRSVP}>You are going to this event.</Text>}
-                </Card>
+                        <Text style={styles.eventDetails}>Event Details :</Text>
+                        <Text style={styles.messageBody}>{communication.body}</Text>
+                        {isEvent &&
+                            <View style={[styles.row, styles.dateTimeContainer]}>
+                                <DateComponent startDate={communication.event.start_date} />
+                                <TimeComponent startDate={communication.event.start_date} endDate={communication.event.end_date} />
+                                <RSVPComponent isGoing={this.state.communication.rsvp} onRSVPPressed={() => this.onRSVPPressed()} />
+                            </View>
+                        }
+                        {this.state.communication.rsvp && <Text style={styles.successRSVP}>You are going to this event.</Text>}
+                    </Card>
+                </ScrollView>
             </View>
         );
     }
@@ -142,10 +145,20 @@ const DateComponent = (props: DateProps) => {
     );
 };
 
-export const RSVPComponent = ({ onRSVPPressed }) => {
+export const RSVPComponent = ( props ) => {
+    props.isGoing
+    if (props.isGoing){
+        return (
+            <View>
+                <Button style={{backgroundColor:"#dddddd"}} info badge onPress={() => props.onRSVPPressed()}>
+                    <Text style={styles.rsvpText}>Remove RSVP</Text>
+                </Button>
+            </View>
+        )
+    }
     return (
         <View>
-            <Button info badge onPress={() => onRSVPPressed()}>
+            <Button info badge onPress={() => props.onRSVPPressed()}>
                 <Text style={styles.rsvpText}>RSVP</Text>
             </Button>
         </View>
