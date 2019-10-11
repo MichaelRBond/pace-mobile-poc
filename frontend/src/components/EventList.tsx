@@ -6,6 +6,8 @@ import { EventCard } from "./EventCard";
 interface Props {
   communications: TaggedCommunication[];
   deleteCallback: (id: number) => void;
+  getRSVP: (id: number) => Promise<number>;
+  rsvps: {[id: number]: number};
 }
 
 export class EventList extends React.Component<Props, {}> {
@@ -18,6 +20,8 @@ export class EventList extends React.Component<Props, {}> {
             communication={communication}
             key={communication.id}
             onDelete={() => this.props.deleteCallback(communication.id)}
+            getRSVP={() => this.props.getRSVP(communication.id)}
+            rsvpCount={this.props.rsvps[communication.id]}
           />
         ))}
       </div>

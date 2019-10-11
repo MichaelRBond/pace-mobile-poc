@@ -29,10 +29,16 @@ export interface CommunicationPostMessage {
   subject: string;
 }
 
+export interface RsvpResponse {
+  count: number;
+  id: number;
+}
+
 export class PaceBackendClient {
 
   private static AUTH_URL: string = "/api/v1/account/verify";
   private static COMMUNICATIONS_URL: string = "/api/v1/communications";
+  private static RSVP_URL: string = "/api/v1/rsvp";
 
   private username: string;
   private password: string;
@@ -104,6 +110,20 @@ export class PaceBackendClient {
     if (response.status !== 200) {
       throw new Error(`Failed to delete communication`);
     }
+  }
+
+  public async getRsvpCount(id: number): Promise<RsvpResponse> {
+    const url = `${this.endpoint}${PaceBackendClient.RSVP_URL}/${id}`;
+    const requestParams: HttpRequestConfig = {
+      password: this.password,
+      url,
+      username: this.username,
+    };
+    const response = await this.httpClient.get<RsvpResponse>(requestParams);
+    if (response.status !== 200) {
+      throw new Error(`Failed to get rsvp count`);
+    }
+    return response.data;
   }
 
   private initializeCredentials(username: string, password: string): void {

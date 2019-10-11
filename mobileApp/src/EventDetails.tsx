@@ -94,10 +94,11 @@ const getPrettyDate = (ts: number): string => {
 
 const getPrettyTime = (ts: number): string => {
     const d = new Date(ts * 1000);
-    const hour = d.getHours();
+    const hour24 = d.getHours();
+    const hour12 = hour24 > 12 ? hour24 % 12 : hour24;
     const minute = d.getMinutes() < 10 ? "0" + d.getMinutes() : "" + d.getMinutes();
-    const ampm = hour < 12 ? "AM" : "PM";
-    return `${hour % 12}:${minute} ${ampm}`;
+    const ampm = hour24 < 12 ? "AM" : "PM";
+    return `${hour12}:${minute} ${ampm}`;
 };
 
 const getDateIconName = (ts: number, letterIndex: number) => {

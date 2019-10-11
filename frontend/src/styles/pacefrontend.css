@@ -65,6 +65,11 @@
   justify-content: flex-end;
 }
 
+.display-spaced {
+  display: flex;
+  justify-content: space-between;
+}
+
 .formated-paragraph {
   white-space: pre-wrap;
 }
