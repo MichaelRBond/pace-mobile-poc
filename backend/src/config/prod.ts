@@ -4,7 +4,7 @@ export const config: Config = {
   ...common,
   hapi: {
     ...common.hapi,
-    host: "192.241.138.158",
+    host: process.env.DOCKER_HOST_ADDR || "192.241.138.158",
     port: 3001,
   },
   mysql: {

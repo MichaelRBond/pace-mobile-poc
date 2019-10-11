@@ -3,4 +3,5 @@ export ONESIGNAL_APIKEY=
 export ONESIGNAL_APPID=
 export MYSQL_ROOT_PASSWORD=
 export MYSQL_PASSWORD=
-export MYSQL_HOST=
+export MYSQL_HOST=src_pace-mysql_1
+export DOCKER_HOST_ADDR=0.0.0.0
