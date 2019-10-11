@@ -99,7 +99,7 @@ export class EventManager extends React.Component<Props, State> {
 
   private sortCommunications(communications: TaggedCommunication[]): TaggedCommunication[] {
     return communications.sort((a: TaggedCommunication, b: TaggedCommunication) => {
-      return a.expiration_date - b.expiration_date;
+      return b.created_date - a.created_date;
     });
   }
 }

@@ -18,7 +18,7 @@ export class CommunicationsDao {
 
   public async getCommunications(): Promise<Communication[]> {
     const mysql = this.mysqlProvider();
-    const sql = "SELECT * FROM `communications` WHERE `expirationDate`>?";
+    const sql = "SELECT * FROM `communications` WHERE `expirationDate`>? ORDER BY `createdDate` DESC";
     const now = this.dateTime.dateNoWInSeconds();
     const result = await mysql.query(sql, [now]);
     return result.map(this.dbToCommunication);
