@@ -5,9 +5,11 @@ import * as React from "react";
 interface Props {
     communication: Communication;
     onDelete?: () => void;
+    getRSVP?: () => void;
+    rsvpCount?: number;
 }
 
-export const EventCard = ({ communication, onDelete }: Props) => (
+export const EventCard = ({ communication, onDelete, getRSVP, rsvpCount }: Props) => (
     <Card>
         <div className={"event-title"}>
             <Icon icon={communication.event != null ? "calendar" : "clipboard"} />
@@ -25,14 +27,26 @@ export const EventCard = ({ communication, onDelete }: Props) => (
             <Tag intent={Intent.NONE}>{new Date(communication.expiration_date * 1000).toDateString()}</Tag>
         </div>
         <p className={"formated-paragraph"}>{communication.body}</p>
-        {onDelete != null && <div className={"display-end"}>
-            <Button
+        <div className={"display-spaced"}>
+            <div>
+                {getRSVP != null && <Button
+                    icon={"user"}
+                    intent={Intent.NONE}
+                    onClick={getRSVP}
+                >
+                    {"Check RSVP"}
+                </Button>}
+                {rsvpCount != null && <Tag style={{marginLeft:"1em"}}intent={Intent.PRIMARY}>
+                    {`${rsvpCount} RSVPs`}
+                </Tag>}
+            </div>
+            {onDelete != null && <Button
                 icon={"remove"}
                 intent={Intent.DANGER}
                 onClick={onDelete}
             >
                 {"Delete"}
-            </Button>
-        </div>}
+            </Button>}
+        </div>
     </Card>
 );
