@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { Communication } from "./service";
+import { ColorHeader } from "./Header";
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 

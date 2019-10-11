@@ -1,25 +1,16 @@
 import React from "react";
 import { Text, View, ScrollView } from "react-native";
 import { ColorHeader } from "./Header";
-import YouTube from 'react-native-youtube';
-import { setState } from "expect/build/jestMatchersObject";
-export const About = () => {
+export const Donate = () => {
   
   return (
   <View>
     <ColorHeader title={"About"}/>
     <ScrollView>
-      <Text style={{fontWeight:"bold", textAlign:"center", fontSize:20, marginBottom:20}}>
-      West Virginia leads the nation in citizens with disabilities; about one in four. Mountaineers with disabilities have the highest rate of unemployment. In Morgantown, Fairmont, Grafton and Charleston,  PACE Enterprises is trying to help individuals who have disabilities find great, supportive jobs.
+      <Text style={{fontWeight:"bold", textAlign:"left", fontSize:20, marginBottom:20}}>
+        At PACE, we help people with disabilities get great jobs. You can help make a difference by pledging any amount you can. Your donation will:      
       </Text>
-      <YouTube
-        videoId="QGe-xjqRpWI" // The YouTube video ID
-        onReady={e => setState({ isReady: true })}
-        onChangeState={e => setState({ status: e.state })}
-        onChangeQuality={e => setState({ quality: e.quality })}
-        onError={e => setState({ error: e.error })}
-        style={{ alignSelf: 'stretch', height: 300 }}
-      />
+      <Text>{'\u2B24'}Test</Text>
       <Text style={{fontWeight:"bold", textAlign:"center", fontSize:20, marginTop:20}}>
         PACE Enterprises, originally named PACE TEC and founded by a group of parents that recognized the special support their sons and daughters would need to succeed as young adults, is a non-profit, community-led organization that provides pre-vocational and vocational rehabilitation services to individuals with disabilities, without regard to race, color, or national origin, throughout North Central West Virginia since 1972.
       </Text>
