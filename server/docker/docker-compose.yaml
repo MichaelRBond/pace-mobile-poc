@@ -28,6 +28,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - ONESIGNAL_APIKEY=${ONESIGNAL_APIKEY}
       - ONESIGNAL_APPID=${ONESIGNAL_APPID}
+      - DOCKER_HOST_ADDR=${DOCKER_HOST_ADDR}
     entrypoint: yarn run start
 networks:
   public:
