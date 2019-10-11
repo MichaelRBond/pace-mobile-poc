@@ -79,7 +79,7 @@ const HomeTabsNavigator = createBottomTabNavigator(
 
 
 const RootNavigator = createStackNavigator({
-  CommunicationsStack: {screen:HomeTabsNavigator, navigationOptions:{title:"Pace"}},
+  CommunicationsStack: {screen:HomeTabsNavigator, navigationOptions:{title:"Back"}},
   EventDetails: {screen: EventDetails, navigationOptions:{title:"Event Details"}},
 }, {
   headerMode: "float",

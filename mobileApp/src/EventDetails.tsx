@@ -1,9 +1,8 @@
 import {Body, Card, CardItem, Button, Icon} from "native-base";
-import React, {useState} from "react";
+import React from "react";
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { Communication } from "./service";
-import { ColorHeader } from "./Header";
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
