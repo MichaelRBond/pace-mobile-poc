@@ -1,0 +1,6 @@
+export CONFIG_ENV=prod
+export ONESIGNAL_APIKEY=
+export ONESIGNAL_APPID=
+export MYSQL_ROOT_PASSWORD=
+export MYSQL_PASSWORD=
+export MYSQL_HOST=

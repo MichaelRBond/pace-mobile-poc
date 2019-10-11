@@ -9,6 +9,7 @@ export const config: Config = {
   },
   mysql: {
     ...common.mysql,
-    password: process.env.MYSQL_PASSWORD,
+    host: process.env.MYSQL_HOST || "",
+    password: process.env.MYSQL_PASSWORD || "",
   },
 };
