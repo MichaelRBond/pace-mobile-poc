@@ -1,13 +1,11 @@
 import React from "react";
 import { Text, View, ScrollView } from "react-native";
-import { ColorHeader } from "./Header";
 import YouTube from 'react-native-youtube';
 import { setState } from "expect/build/jestMatchersObject";
 export const About = () => {
   
   return (
   <View>
-    <ColorHeader title={"About"}/>
     <ScrollView>
       <Text style={{fontWeight:"bold", textAlign:"center", fontSize:20, marginBottom:20}}>
       West Virginia leads the nation in citizens with disabilities; about one in four. Mountaineers with disabilities have the highest rate of unemployment. In Morgantown, Fairmont, Grafton and Charleston,  PACE Enterprises is trying to help individuals who have disabilities find great, supportive jobs.
