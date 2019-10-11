@@ -7,6 +7,7 @@ interface VerifyAuthenticationResponse {
 
 export interface TaggedCommunication extends Communication {
   id: number;
+  created_date: number;
 }
 
 export interface Communication {
