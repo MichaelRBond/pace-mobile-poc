@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
 import { ColorHeader } from "./Header";
-import { Communication } from "./service";
+import { Communication, Service } from "./service";
 
 const styles = StyleSheet.create({
     container: {
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 });
 
 export interface Props {
+    service: Service;
     communications: Communication[];
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
@@ -31,13 +32,28 @@ export class EventList extends React.Component<Props, State> {
     }
 
     public onPress(item) {
-        this.props.navigation.navigate("EventDetails", { event: item });
+        this.props.navigation.navigate(
+            "EventDetails",
+            {
+                event: item,
+                onUpdate: (communication: Communication) => {
+                    this.props.service.saveRsvp(communication.id, communication.rsvp);
+                    const newComms = this.state.communications.map((comm) => {
+                        if (comm.id === communication.id) {
+                            return communication;
+                        }
+                        return comm;
+                    });
+                    this.setState({ communications: newComms });
+                },
+            },
+        );
     }
 
     public render() {
         return (
             <View style={styles.container}>
-                <ColorHeader title={"Posts"}/>
+                <ColorHeader title={"Posts"} />
                 <Content>
                     {this.state.communications.map((item) => {
                         return (

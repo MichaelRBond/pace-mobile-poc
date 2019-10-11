@@ -1,8 +1,8 @@
-import {Body, Card, CardItem, Button, Icon} from "native-base";
+import { Body, Card, CardItem, Button, Icon } from "native-base";
 import React from "react";
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { NavigationParams, NavigationScreenProp, NavigationState } from "react-navigation";
-import { Communication } from "./service";
+import { Communication, Service } from "./service";
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
@@ -17,7 +17,7 @@ interface DateProps {
 
 interface State {
     communication: Communication;
-    hasRSVP: boolean;
+    onUpdate: (c: Communication) => void;
 }
 
 export default class EventDetails extends React.Component<Props, State> {
@@ -25,12 +25,12 @@ export default class EventDetails extends React.Component<Props, State> {
         super(props);
         this.state = {
             communication: props.navigation.getParam("event"),
-            hasRSVP: false,
+            onUpdate: props.navigation.getParam("onUpdate"),
         };
     }
 
     public render() {
-        const {communication, hasRSVP} = this.state;
+        const { communication } = this.state;
         const createdDate = formatUnixTimestamp(communication.created_date);
 
         let startDate: string;
@@ -57,25 +57,26 @@ export default class EventDetails extends React.Component<Props, State> {
                     </View>
                     <Text style={styles.eventDetails}>Event Details :</Text>
                     <Text style={styles.messageBody}>{communication.body}</Text>
-                {isEvent && 
-                <View style={[styles.row, styles.dateTimeContainer]}>
-                    <DateComponent startDate={communication.event.start_date}/>
-                    <TimeComponent startDate={communication.event.start_date} endDate={communication.event.end_date}/>
-                    <RSVPComponent onRSVPPressed={() => this.onRSVPPressed()}/>
-                </View>
-                }
-                {this.state.hasRSVP && <Text style={styles.successRSVP}>You are going to this event.</Text>}
+                    {isEvent &&
+                        <View style={[styles.row, styles.dateTimeContainer]}>
+                            <DateComponent startDate={communication.event.start_date} />
+                            <TimeComponent startDate={communication.event.start_date} endDate={communication.event.end_date} />
+                            <RSVPComponent onRSVPPressed={() => this.onRSVPPressed()} />
+                        </View>
+                    }
+                    {this.state.communication.rsvp && <Text style={styles.successRSVP}>You are going to this event.</Text>}
                 </Card>
             </View>
         );
     }
 
     private onRSVPPressed = () => {
+        const newVal = !this.state.communication.rsvp;
         this.setState({
-            hasRSVP: !this.state.hasRSVP,
+            communication: { ...this.state.communication, rsvp: newVal },
         }, () => {
-            const {hasRSVP} = this.state;
-            Alert.alert("Your RSVP status has changed",  hasRSVP ? "You have been added to the list" : "You have been removed from the list");
+            this.state.onUpdate(this.state.communication);
+            Alert.alert("Your RSVP status has changed", newVal ? "You have been added to the list" : "You have been removed from the list");
         });
     }
 }
@@ -107,18 +108,18 @@ const getDateIconName = (ts: number, letterIndex: number) => {
     return `numeric-${date.charAt(letterIndex)}`;
 };
 
-const getMonthName = (ts:number) => {
+const getMonthName = (ts: number) => {
     const timestampArray = getPrettyDate(ts).split("-");
     const date = timestampArray[0];
-    return months[parseInt(date)-1];
+    return months[parseInt(date) - 1];
 };
 
 const DateComponent = (props: DateProps) => {
-    const {startDate} = props;
+    const { startDate } = props;
     return (
         <View style={styles.dateContainer}>
             <Icon
-                style={[styles.icon, {fontSize: 40}]}
+                style={[styles.icon, { fontSize: 40 }]}
                 name="calendar"
                 type="MaterialCommunityIcons"
             />
@@ -141,7 +142,7 @@ const DateComponent = (props: DateProps) => {
     );
 };
 
-export const RSVPComponent = ({onRSVPPressed}) => {
+export const RSVPComponent = ({ onRSVPPressed }) => {
     return (
         <View>
             <Button info badge onPress={() => onRSVPPressed()}>
@@ -152,11 +153,11 @@ export const RSVPComponent = ({onRSVPPressed}) => {
 };
 
 const TimeComponent = (props: DateProps) => {
-    const {startDate, endDate} = props;
+    const { startDate, endDate } = props;
     return (
         <View style={styles.dateContainer}>
             <Icon
-                style={[styles.icon, {fontSize: 40}]}
+                style={[styles.icon, { fontSize: 40 }]}
                 name="clock-outline"
                 type="MaterialCommunityIcons"
             />
