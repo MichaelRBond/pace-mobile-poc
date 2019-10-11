@@ -1,11 +1,9 @@
 import React from "react";
 import { Text, View, ScrollView } from "react-native";
-import { ColorHeader } from "./Header";
 export const Donate = () => {
   
   return (
   <View>
-    <ColorHeader title={"About"}/>
     <ScrollView>
       <Text style={{fontWeight:"bold", textAlign:"left", fontSize:20, marginBottom:20}}>
         At PACE, we help people with disabilities get great jobs. You can help make a difference by pledging any amount you can. Your donation will:      
