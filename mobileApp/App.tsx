@@ -11,6 +11,7 @@ interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 interface State {
+  service: Service;
   isLoading: boolean;
   config: config.Config;
   eventsData: Communication[];
@@ -21,10 +22,12 @@ export default class App extends Component<Props, State> {
   constructor(props: Props) {
     OneSignal.init("c831b21b-810f-4b7f-8bfa-7cf2168665d7");
     super(props);
+    const cfg = config.get();
     this.state = {
-      config: config.get(),
+      config: cfg,
       eventsData: [],
       isLoading: true,
+      service: new Service(cfg.serverHost),
     };
     this.getEventsData = this.getEventsData.bind(this);
   }
@@ -36,8 +39,7 @@ export default class App extends Component<Props, State> {
   }
 
   public async getEventsData() {
-    const service = new Service(this.state.config.serverHost);
-    const data = await service.fetchCommunications();
+    const data = await this.state.service.fetchCommunications();
     this.setState({
       eventsData: data,
       isLoading: false,
@@ -50,6 +52,9 @@ export default class App extends Component<Props, State> {
       return <LoadingView />;
     }
 
-    return <EventList navigation={this.props.navigation} communications={this.state.eventsData}> </EventList>;
+    return <EventList
+      navigation={this.props.navigation}
+      communications={this.state.eventsData}
+      service={this.state.service}> </EventList>;
   }
 }
