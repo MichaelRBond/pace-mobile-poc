@@ -33,7 +33,6 @@ export default class App extends Component<Props, State> {
   }
 
   public componentDidMount() {
-    // tslint:disable-next-line: no-unused-expression
     SplashScreen && SplashScreen.hide();
     this.getEventsData();
   }
