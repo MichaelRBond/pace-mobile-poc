@@ -39,7 +39,7 @@
     "@blueprintjs/datetime": "^3.14.0",
     "@blueprintjs/icons": "^3.0.0",
     "@blueprintjs/select": "^3.2.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "es6-promise": "^4.2.4",
     "moment-timezone": "^0.5.21",
     "nullable-ts": "^1.2.0",
